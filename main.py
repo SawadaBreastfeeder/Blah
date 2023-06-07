@@ -14,13 +14,29 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 def file_handler(update: Update, context: CallbackContext) -> None:
 
-    file = update.message.document  # Get the file from the message
+    if not update.message.document:
 
-    file_id = file.file_id  # Get the file ID
+        update.message.reply_text("Please send a file to generate an access link.")
 
-    file_access_count = get_file_access_count(file_id)  # Get the current access count for the file
+        return
 
-    access_link = generate_access_link(file_id)  # Generate the access link for the file
+    file = update.message.document
+
+    file_id = file.file_id
+
+    file_access_count = get_file_access_count(file_id)
+
+    access_link = generate_access_link(file_id)
+
+    reply_text = f"Access Link: {access_link}\nAccess Count: {file_access_count}"
+
+    update.message.reply_text(reply_text)
+
+    increment_file_access_count(file_id)
+
+
+
+
 
     # Send the access link and access count as a reply to the user
 
