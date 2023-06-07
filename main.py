@@ -76,7 +76,7 @@ def main() -> None:
 
     # Create the Telegram Updater and dispatcher
 
-    updater = Updater("YOUR_TELEGRAM_BOT_TOKEN")
+    updater = Updater("6242918828:AAHH0M0GZC4rjF57bZIvbFMMaOCSSs0ZsHw")
 
     dispatcher = updater.dispatcher
 
